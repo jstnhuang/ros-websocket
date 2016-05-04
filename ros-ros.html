@@ -1,0 +1,112 @@
+<link rel="import" href="../polymer/polymer.html">
+<link rel="import" href="eventemitter2-import.html">
+<link rel="import" href="roslib-import.html">
+
+<!--
+An element wrapping around [roslibjs](https://github.com/RobotWebTools/roslibjs).
+See the documentation and tutorials for roslibjs to learn the basics.
+
+This element represents the [`ROSLIB.Ros`](http://robotwebtools.org/jsdoc/roslibjs/current/global.html#ROSLIB) object.
+
+By default, this element will establish a connection with the server at the same hostname as the page, with port 9090:
+
+    <ros-ros></ros-ros>
+
+You can also specify a websocket URL explicitly:
+
+    <ros-ros url="ws://localhost:9090"></ros-ros>
+
+By default, the element will try to establish a connection immediately.
+However, if this wasn't successful or the connection gets disconnected, you can call `connect()` to connect again.
+
+@demo demo/index.html
+-->
+
+<dom-module id="ros-ros">
+  <template>
+  </template>
+
+  <script>
+    Polymer({
+      is: 'ros-ros',
+
+      properties: {
+        /**
+         * The URL of the websocket server to connect to. By default, it is the same hostname as the page, at port 9090.
+         * For example, if the page URL is http://robotsite.com/foo, then the default websocket URL is ws://robotsite.com:9090.
+         *
+         * @type string
+         */
+        url: {
+          type: String,
+          value: function() {
+            var hostname = window.location.hostname;
+            var protocol = 'ws:';
+            if (window.location.protocol == 'https:') {
+              protocol = 'wss:'
+            }
+            return protocol + '//' + hostname + ':9090';
+          }
+        },
+
+        /**
+         * The ROSLIB.Ros object this elements wraps.
+         */
+        ros: Object,
+      },
+
+      // Element Lifecycle
+
+      ready: function() {
+        var that = this;
+        this.ros = new ROSLIB.Ros({
+          url: that.url
+        });
+        this.ros.on('connection', function() {
+          that.fire('connection');
+        });
+        this.ros.on('error', function(error) {
+          that.fire('error', error);
+        });
+        this.ros.on('close', function() {
+          that.fire('close');
+        });
+      },
+
+      /**
+       * Sets the new websocket URL and connects to the server.
+       * Note that the element automatically tries to connect when the page is loaded.
+       *
+       * @param {url} string The websocket URL to connect to. If undefined, connects to the `url` property.
+       */
+      connect: function(url) {
+        var url = url;
+        if (url) {
+          this.url = url;
+        } else {
+          url = this.url;
+        }
+        this.ros.connect(url);
+      }
+
+      /**
+       * The `connection` event is fired when the connection to the websocket server is established.
+       *
+       * @event connection
+       */
+
+      /**
+       * The `error` event is fired if there was an error connecting to the websocket server.
+       *
+       * @event error
+       * @detail error
+       */
+
+      /**
+       * The `close` event is fired when the connection to the websocket server is closed.
+       *
+       * @event close
+       */
+    });
+  </script>
+</dom-module>
