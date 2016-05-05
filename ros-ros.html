@@ -52,7 +52,10 @@ However, if this wasn't successful or the connection gets disconnected, you can 
         /**
          * The ROSLIB.Ros object this elements wraps.
          */
-        ros: Object,
+        ros: {
+          type: Object,
+          notify: true,
+        },
       },
 
       // Element Lifecycle
