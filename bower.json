@@ -1,18 +1,19 @@
 {
   "name": "ros-ros",
-  "version": "1.0.6",
+  "version": "1.0.1",
   "authors": [
-    "Anonymous <anonymous@example.com>"
+    "Justin Huang <jstn@cs.washington.edu>"
   ],
-  "description": "An element providing a solution to no problem in particular.",
+  "description": "An element for using roslibjs.",
   "keywords": [
     "web-component",
     "polymer",
-    "seed"
+    "seed",
+    "ros"
   ],
   "main": "ros-ros.html",
   "license": "http://polymer.github.io/LICENSE.txt",
-  "homepage": "https://github.com/<USERNAME>/seed-element/",
+  "homepage": "https://github.com/jstnhuang/ros-ros",
   "ignore": [
     "/.*",
     "/test/"
