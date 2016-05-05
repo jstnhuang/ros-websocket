@@ -12,7 +12,7 @@
     "ros"
   ],
   "main": "ros-ros.html",
-  "license": "http://polymer.github.io/LICENSE.txt",
+  "license": "https://opensource.org/licenses/MIT",
   "homepage": "https://github.com/jstnhuang/ros-ros",
   "ignore": [
     "/.*",
