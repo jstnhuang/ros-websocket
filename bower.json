@@ -1,6 +1,6 @@
 {
-  "name": "ros-ros",
-  "version": "1.0.1",
+  "name": "ros-websocket",
+  "version": "2.0.0",
   "authors": [
     "Justin Huang <jstn@cs.washington.edu>"
   ],
@@ -8,12 +8,11 @@
   "keywords": [
     "web-component",
     "polymer",
-    "seed",
     "ros"
   ],
-  "main": "ros-ros.html",
+  "main": "ros-websocket.html",
   "license": "https://opensource.org/licenses/MIT",
-  "homepage": "https://github.com/jstnhuang/ros-ros",
+  "homepage": "https://github.com/jstnhuang/ros-websocket",
   "ignore": [
     "/.*",
     "/test/"

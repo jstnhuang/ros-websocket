@@ -10,27 +10,36 @@ This element represents the [`ROSLIB.Ros`](http://robotwebtools.org/jsdoc/roslib
 
 By default, this element will establish a connection with the server at the same hostname as the page, with port 9090:
 
-    <ros-ros></ros-ros>
+    <ros-websocket auto></ros-websocket>
 
 You can also specify a websocket URL explicitly:
 
-    <ros-ros url="ws://localhost:9090"></ros-ros>
+    <ros-websocket auto url="ws://localhost:9090"></ros-websocket>
 
-By default, the element will try to establish a connection immediately.
-However, if this wasn't successful or the connection gets disconnected, you can call `connect()` to connect again.
+If the `auto` attribute is set, the element will try to establish a connection immediately or whenever the URL changes.
+You can manually connect by calling `connect()`.
 
 @demo demo/index.html
 -->
 
-<dom-module id="ros-ros">
+<dom-module id="ros-websocket">
   <template>
   </template>
 
   <script>
     Polymer({
-      is: 'ros-ros',
+      is: 'ros-websocket',
 
       properties: {
+        /**
+         * If true, automatically connects to the given websocket URL whenever the URL changes.
+         * @type boolean
+         */
+        auto: {
+          type: Boolean,
+          value: false,
+        },
+
         /**
          * The URL of the websocket server to connect to. By default, it is the same hostname as the page, at port 9090.
          * For example, if the page URL is http://robotsite.com/foo, then the default websocket URL is ws://robotsite.com:9090.
@@ -46,7 +55,8 @@ However, if this wasn't successful or the connection gets disconnected, you can 
               protocol = 'wss:'
             }
             return protocol + '//' + hostname + ':9090';
-          }
+          },
+          observer: '_onUrlChanged',
         },
 
         /**
@@ -60,11 +70,17 @@ However, if this wasn't successful or the connection gets disconnected, you can 
 
       // Element Lifecycle
 
-      ready: function() {
-        var that = this;
+      /**
+       * Connects to the websocket server given by the url attribute.
+       */
+      connect: function() {
+        if (this.ros && this.ros.isConnected) {
+          this.ros.close();
+        }
         this.ros = new ROSLIB.Ros({
-          url: that.url
+          url: this.url
         });
+        var that = this;
         this.ros.on('connection', function() {
           that.fire('connection');
         });
@@ -76,21 +92,11 @@ However, if this wasn't successful or the connection gets disconnected, you can 
         });
       },
 
-      /**
-       * Sets the new websocket URL and connects to the server.
-       * Note that the element automatically tries to connect when the page is loaded.
-       *
-       * @param {url} string The websocket URL to connect to. If undefined, connects to the `url` property.
-       */
-      connect: function(url) {
-        var url = url;
-        if (url) {
-          this.url = url;
-        } else {
-          url = this.url;
+      _onUrlChanged: function() {
+        if (this.auto) {
+          this.connect();
         }
-        this.ros.connect(url);
-      }
+      },
 
       /**
        * The `connection` event is fired when the connection to the websocket server is established.
