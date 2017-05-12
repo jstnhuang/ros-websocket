@@ -1,6 +1,6 @@
 {
   "name": "ros-websocket",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "authors": [
     "Justin Huang <jstn@cs.washington.edu>"
   ],
