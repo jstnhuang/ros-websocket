@@ -1,4 +1,5 @@
 # ros-websocket
+[![Published on webcomponents.org](https://img.shields.io/badge/webcomponents.org-published-blue.svg)](https://www.webcomponents.org/element/jstnhuang/ros-websocket)
 
 A Polymer element that wraps roslibjs.
 
