@@ -1,6 +1,6 @@
 {
   "name": "ros-websocket",
-  "version": "2.0.1",
+  "version": "3.0.0",
   "authors": [
     "Justin Huang <jstn@cs.washington.edu>"
   ],
@@ -18,9 +18,10 @@
     "/test/"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^1.2.0"
+    "polymer": "Polymer/polymer#^2.0.0",
+    "roslib": "RobotWebTools/roslibjs#^0.18.0"
   },
   "devDependencies": {
-    "iron-component-page": "PolymerElements/iron-component-page#^1.0.0"
+    "iron-component-page": "PolymerElements/iron-component-page#^2.0.0"
   }
 }
