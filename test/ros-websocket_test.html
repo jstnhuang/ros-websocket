@@ -1,0 +1,56 @@
+<!doctype html>
+
+<html>
+  <head>
+    <title>ros-websocket test</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1, user-scalable=yes">
+    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../web-component-tester/browser.js"></script>
+
+    <link rel="import" href="../ros-websocket.html">
+  </head>
+  <body>
+
+    <test-fixture id="basic">
+      <template>
+        <ros-websocket></ros-websocket>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="nonAuto">
+      <template>
+        <ros-websocket></ros-websocket>
+      </template>
+    </test-fixture>
+
+    <test-fixture id="auto">
+      <template>
+        <ros-websocket auto></ros-websocket>
+      </template>
+    </test-fixture>
+
+
+    <script>
+      suite('ros-websocket', function() {
+
+        test('instantiating the element works', function() {
+          var element = fixture('basic');
+          assert.equal(element.is, 'ros-websocket');
+        });
+
+        test('does not connect without auto', function() {
+          var element = fixture('nonAuto');
+          assert.equal(element.ros, undefined);
+        });
+
+        test('tries to connect with auto', function() {
+          var element = fixture('auto');
+          assert(element.ros, 'ROSLIB.Ros object exists');
+          assert.equal(element.ros.isConnected, false);
+        });
+
+      });
+    </script>
+  </body>
+</html>
