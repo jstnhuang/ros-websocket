@@ -1,15 +1,37 @@
 {
-  "name": "@justinhuang/ros-websocket",
-  "version": "3.0.2",
   "description": "A web component wrapping roslibjs's ROS object",
+  "keywords": [
+    "web-component",
+    "polymer",
+    "ros"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/jstnhuang/ros-websocket.git"
   },
+  "homepage": "https://github.com/jstnhuang/ros-websocket#readme",
+  "name": "@justinhuang/ros-websocket",
+  "version": "3.0.2",
   "author": "Justin Huang",
   "license": "BSD-3-Clause",
   "bugs": {
     "url": "https://github.com/jstnhuang/ros-websocket/issues"
   },
-  "homepage": "https://github.com/jstnhuang/ros-websocket#readme"
+  "resolutions": {
+    "inherits": "2.0.3",
+    "samsam": "1.1.3",
+    "supports-color": "3.1.2",
+    "type-detect": "1.0.0"
+  },
+  "main": "ros-websocket.js",
+  "dependencies": {
+    "eventemitter2": "~2.2.0",
+    "roslib": ">=0.14.0",
+    "@polymer/polymer": "^3.0.0"
+  },
+  "devDependencies": {
+    "@polymer/iron-component-page": "^3.0.0-pre.18",
+    "wct-browser-legacy": "^1.0.1",
+    "@webcomponents/webcomponentsjs": "^2.0.0"
+  }
 }

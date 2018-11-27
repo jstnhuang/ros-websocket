@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ros-websocket Demo</title>
 
-    <script src="../../webcomponentsjs/webcomponents-lite.js"></script>
+    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
 
-    <link rel="import" href="../ros-websocket.html">
+    <script type="module" src="../ros-websocket.js"></script>
 
   </head>
   <body>
@@ -20,23 +20,24 @@
     </div>
     <ros-websocket></ros-websocket>
 
-    <script>
-      var seedElement = document.querySelector('ros-websocket');
-      seedElement.addEventListener('connection', function() {
-        console.log('Connected to the websocket server.');
-      });
-      seedElement.addEventListener('error', function(error) {
-        console.log('Error connecting to the websocket server:', error);
-      });
-      seedElement.addEventListener('close', function() {
-        console.log('Connection to websocket server closed.');
-      });
+    <script type="module">
+import '../ros-websocket.js';
+var seedElement = document.querySelector('ros-websocket');
+seedElement.addEventListener('connection', function() {
+  console.log('Connected to the websocket server.');
+});
+seedElement.addEventListener('error', function(error) {
+  console.log('Error connecting to the websocket server:', error);
+});
+seedElement.addEventListener('close', function() {
+  console.log('Connection to websocket server closed.');
+});
 
-      document.querySelector('#connectButton').addEventListener('click', function() {
-        seedElement.url = document.querySelector('#urlInput').value;
-        seedElement.connect();
-      });
-    </script>
+document.querySelector('#connectButton').addEventListener('click', function() {
+  seedElement.url = document.querySelector('#urlInput').value;
+  seedElement.connect();
+});
+</script>
 
   </body>
 </html>
