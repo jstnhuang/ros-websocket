@@ -1,3 +1,236 @@
 {
+  "elements": [
+    {
+      "methods": [
+        {
+          "return": {
+            "type": "void"
+          },
+          "name": "connect",
+          "privacy": "public",
+          "description": "Connects to the websocket server given by the url attribute.",
+          "sourceRange": {
+            "start": {
+              "column": 2,
+              "line": 95
+            },
+            "end": {
+              "column": 3,
+              "line": 109
+            }
+          },
+          "params": [],
+          "metadata": {}
+        },
+        {
+          "return": {
+            "type": "void"
+          },
+          "name": "_connectionParamsChanged",
+          "privacy": "protected",
+          "description": "",
+          "sourceRange": {
+            "start": {
+              "column": 2,
+              "line": 111
+            },
+            "end": {
+              "column": 3,
+              "line": 115
+            }
+          },
+          "params": [
+            {
+              "name": "auto"
+            },
+            {
+              "name": "url"
+            }
+          ],
+          "metadata": {}
+        }
+      ],
+      "name": "RosWebSocket",
+      "privacy": "public",
+      "sourceRange": {
+        "start": {
+          "column": 0,
+          "line": 30
+        },
+        "end": {
+          "column": 1,
+          "line": 116
+        }
+      },
+      "summary": "",
+      "superclass": "PolymerElement",
+      "demos": [
+        {
+          "url": "demo/index.html",
+          "description": ""
+        }
+      ],
+      "events": [
+        {
+          "metadata": {},
+          "type": "CustomEvent",
+          "name": "close",
+          "description": "The `close` event is fired when the connection to the websocket server\nis closed."
+        },
+        {
+          "metadata": {},
+          "type": "CustomEvent",
+          "name": "connection",
+          "description": "The `connection` event is fired when the connection to the websocket\nserver is established."
+        },
+        {
+          "metadata": {},
+          "type": "CustomEvent",
+          "name": "error",
+          "description": "The `error` event is fired if there was an error connecting to the\nwebsocket server."
+        },
+        {
+          "metadata": {},
+          "type": "CustomEvent",
+          "name": "url-changed",
+          "description": "Fired when the `url` property changes."
+        },
+        {
+          "metadata": {},
+          "type": "CustomEvent",
+          "name": "ros-changed",
+          "description": "Fired when the `ros` property changes."
+        }
+      ],
+      "styling": {
+        "cssVariables": [],
+        "selectors": []
+      },
+      "staticMethods": [],
+      "tagname": "ros-websocket",
+      "attributes": [
+        {
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 39
+            },
+            "end": {
+              "column": 41,
+              "line": 39
+            }
+          },
+          "type": "boolean | null | undefined",
+          "name": "auto",
+          "description": "If true, automatically connects to the websocket URL on startup and\nwhenever the URL changes."
+        },
+        {
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 49
+            },
+            "end": {
+              "column": 7,
+              "line": 60
+            }
+          },
+          "type": "string | null | undefined",
+          "name": "url",
+          "description": "The URL of the websocket server to connect to. By default, it is the\nsame hostname as the page, at port 9090.\nFor example, if the page URL is http://robotsite.com/foo, then the\ndefault websocket URL is ws://robotsite.com:9090."
+        },
+        {
+          "metadata": {},
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 65
+            },
+            "end": {
+              "column": 39,
+              "line": 65
+            }
+          },
+          "type": "Object | null | undefined",
+          "name": "ros",
+          "description": "The ROSLIB.Ros object this elements wraps."
+        }
+      ],
+      "path": "ros-websocket.js",
+      "slots": [],
+      "metadata": {},
+      "properties": [
+        {
+          "name": "auto",
+          "privacy": "public",
+          "description": "If true, automatically connects to the websocket URL on startup and\nwhenever the URL changes.",
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 39
+            },
+            "end": {
+              "column": 41,
+              "line": 39
+            }
+          },
+          "type": "boolean | null | undefined",
+          "defaultValue": "false",
+          "metadata": {
+            "polymer": {
+              "attributeType": "Boolean"
+            }
+          }
+        },
+        {
+          "name": "url",
+          "privacy": "public",
+          "description": "The URL of the websocket server to connect to. By default, it is the\nsame hostname as the page, at port 9090.\nFor example, if the page URL is http://robotsite.com/foo, then the\ndefault websocket URL is ws://robotsite.com:9090.",
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 49
+            },
+            "end": {
+              "column": 7,
+              "line": 60
+            }
+          },
+          "type": "string | null | undefined",
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "attributeType": "String"
+            }
+          }
+        },
+        {
+          "name": "ros",
+          "privacy": "public",
+          "description": "The ROSLIB.Ros object this elements wraps.",
+          "sourceRange": {
+            "start": {
+              "column": 6,
+              "line": 65
+            },
+            "end": {
+              "column": 39,
+              "line": 65
+            }
+          },
+          "type": "Object | null | undefined",
+          "metadata": {
+            "polymer": {
+              "notify": true,
+              "attributeType": "Object"
+            }
+          }
+        }
+      ],
+      "description": "An element wrapping around\n[roslibjs](https://github.com/RobotWebTools/roslibjs).\nSee the documentation and tutorials for roslibjs to learn the basics.\n\nThis element represents the\n[`ROSLIB.Ros`](http://robotwebtools.org/jsdoc/roslibjs/current/global.html#ROSLIB)\nobject.\n\nBy default, this element will establish a connection with the server at the\nsame\nhostname as the page, with port 9090:\n\n    <ros-websocket auto></ros-websocket>\n\nYou can also specify a websocket URL explicitly:\n\n    <ros-websocket auto url=\"ws://localhost:9090\"></ros-websocket>\n\nIf the `auto` attribute is set, the element will try to establish a\nconnection immediately or whenever the URL changes.\nYou can manually connect by calling `connect()`."
+    }
+  ],
   "schema_version": "1.0.0"
 }

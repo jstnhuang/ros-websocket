@@ -5,38 +5,57 @@
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
     <title>ros-websocket Demo</title>
 
-    <script src="../../../@webcomponents/webcomponentsjs/webcomponents-bundle.js"></script>
+    <script src="../node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
+
+    <script type="module">
+      import '@polymer/iron-demo-helpers/demo-pages-shared-styles';
+      import '@polymer/iron-demo-helpers/demo-snippet';
+    </script>
 
     <script type="module" src="../ros-websocket.js"></script>
 
+    <custom-style>
+      <style is="custom-style" include="demo-pages-shared-styles">
+        .vertical-section-container {
+          max-width: 900px;
+        }
+      </style>
+    </custom-style>
   </head>
-  <body>
-    <p>An example of <code>&lt;ros-websocket&gt;</code></p>
-    <p>Open the JavaScript console to see if a connection has been established to the websocket.
+  <body unresolved>
+    <div class="vertical-section-container centered">
+      <h3>Basic ros-websocket demo</h3>
+      <p>
+        An example of <code>&lt;ros-websocket&gt;</code>.<br />
+        Open the JavaScript console to see if a connection has been established to the websocket.
+      </p>
+      <demo-snippet>
+        <template>
+          <ros-websocket></ros-websocket>
 
-    <div>
-      <input type="text" id="urlInput" value="ws://localhost:9090"></input>
-      <input id="connectButton" type="button" value="Connect"></input>
+          <input type="text" id="urlInput" value="ws://localhost:9090"></input>
+          <input id="connectButton" type="button" value="Connect"></input>
+          <script>
+            var websocket = document.querySelector('ros-websocket');
+            websocket.addEventListener('connection', function() {
+              console.log('Connected to the websocket server.');
+            });
+            websocket.addEventListener('error', function(error) {
+              console.error('Error connecting to the websocket server:', error);
+            });
+            websocket.addEventListener('close', function() {
+              console.log('Connection to websocket server closed.');
+            });
+            
+            document.querySelector('#connectButton').addEventListener('click', function() {
+              websocket.url = document.querySelector('#urlInput').value;
+              websocket.connect();
+            });
+
+          </script>
+        </template>
+      </demo-snippet>
     </div>
-    <ros-websocket></ros-websocket>
-
-    <script type="module">
-import '../ros-websocket.js';
-var seedElement = document.querySelector('ros-websocket');
-seedElement.addEventListener('connection', function() {
-  console.log('Connected to the websocket server.');
-});
-seedElement.addEventListener('error', function(error) {
-  console.log('Error connecting to the websocket server:', error);
-});
-seedElement.addEventListener('close', function() {
-  console.log('Connection to websocket server closed.');
-});
-
-document.querySelector('#connectButton').addEventListener('click', function() {
-  seedElement.url = document.querySelector('#urlInput').value;
-  seedElement.connect();
-});
 </script>
 
   </body>
